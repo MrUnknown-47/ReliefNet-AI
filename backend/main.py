@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -18,7 +21,11 @@ app.add_middleware(
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok", "service": "ReliefNet AI Backend"}
+    return {
+        "status": "ok",
+        "service": "ReliefNet AI Backend",
+        "version": "1.0.0"
+    }
 
 if __name__ == "__main__":
     import uvicorn
