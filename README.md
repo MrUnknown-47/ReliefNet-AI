@@ -22,5 +22,5 @@ uvicorn main:app --reload
 
 Using Docker:
 ```bash
-c
+docker-compose up --build
 ```
