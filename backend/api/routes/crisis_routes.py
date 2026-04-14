@@ -4,18 +4,21 @@ from uuid import uuid4
 from models.crisis_model import CrisisReportCreate, CrisisReportResponse
 from services.firestore_service import save_crisis, get_all_crises, get_all_volunteers
 from ai.volunteer_matching import match_volunteers
+from ai.crisis_analyzer import analyze_crisis
 
 router = APIRouter(tags=["Crisis"])
 
 @router.post("/report", status_code=201)
 def create_crisis_report(report: CrisisReportCreate):
+    analysis = analyze_crisis(report)
     new_report = CrisisReportResponse(
         id=str(uuid4()),
         title=report.title,
         description=report.description,
         location=report.location,
         people_affected=report.people_affected,
-        category=report.category
+        category=report.category,
+        ai_analysis=analysis
     )
     
     # Save to Firestore as dictionary
@@ -27,6 +30,7 @@ def create_crisis_report(report: CrisisReportCreate):
     return {
         "message": "Crisis report created", 
         "report_id": new_report.id,
+        "ai_analysis": analysis,
         "matched_volunteers": matched
     }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/dashboard_screen.dart';
 
 void main() {
   runApp(const ReliefNetApp());
@@ -15,11 +16,7 @@ class ReliefNetApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('ReliefNet AI Initialized'),
-        ),
-      ),
+      home: const DashboardScreen(),
     );
   }
 }

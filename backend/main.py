@@ -3,7 +3,7 @@ load_dotenv()
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.routes import crisis_routes, volunteer_routes
+from api.routes import crisis_routes, volunteer_routes, prediction_routes
 
 app = FastAPI(
     title="ReliefNet AI Backend",
@@ -13,6 +13,7 @@ app = FastAPI(
 
 app.include_router(crisis_routes.router, prefix="/api/crisis", tags=["Crisis"])
 app.include_router(volunteer_routes.router, prefix="/api/volunteer", tags=["Volunteer"])
+app.include_router(prediction_routes.router, prefix="/api/predict", tags=["Prediction"])
 
 # Enable CORS
 app.add_middleware(

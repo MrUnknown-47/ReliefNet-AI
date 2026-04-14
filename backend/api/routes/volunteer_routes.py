@@ -22,6 +22,6 @@ def register_volunteer(volunteer: VolunteerRegister):
     return {"message": "Volunteer registered", "volunteer_id": new_volunteer.id}
 
 @router.get("/", response_model=List[VolunteerResponse])
-def get_all_volunteers():
+def get_volunteers_list():
     # Convert Firestore documents to dictionaries before returning
     return get_all_volunteers()

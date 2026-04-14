@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Dict
+from typing import Dict, Optional
 
 class CrisisLocation(BaseModel):
     lat: float
@@ -19,3 +19,4 @@ class CrisisReportResponse(BaseModel):
     location: CrisisLocation
     people_affected: int
     category: str
+    ai_analysis: Optional[Dict] = None

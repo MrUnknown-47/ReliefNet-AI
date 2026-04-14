@@ -4,7 +4,7 @@ from firebase_admin import credentials, firestore
 from datetime import datetime
 
 # Load credentials from environment variable
-cred_path = os.getenv("FIREBASE_CREDENTIALS_PATH")
+cred_path = "./firebase-adminsdk.json"
 
 # Initialize Firebase Admin SDK
 if cred_path and not firebase_admin._apps:
@@ -36,7 +36,7 @@ def get_all_crises():
     if not db:
         return []
     docs = db.collection("crisis_reports").stream()
-    return [{"id": doc.id, **doc.to_dict()} for doc in docs]
+    return [{**doc.to_dict(), "id": doc.id} for doc in docs]
 
 def save_volunteer(volunteer_data: dict):
     if db:
@@ -47,4 +47,4 @@ def get_all_volunteers():
     if not db:
         return []
     docs = db.collection("volunteers").stream()
-    return [{"id": doc.id, **doc.to_dict()} for doc in docs]
+    return [{**doc.to_dict(), "id": doc.id} for doc in docs]
