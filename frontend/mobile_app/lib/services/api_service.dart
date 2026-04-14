@@ -28,19 +28,20 @@ class ApiService {
     }
   }
 
-  Future<Map<String, dynamic>> predictRisk(
-    Map<String, dynamic> regionData,
-  ) async {
+  Future<Map<String, dynamic>> predictRisk(Map<String, dynamic> regionData) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/predict'),
+      Uri.parse('$baseUrl/predict/'), // ← trailing slash
       headers: {'Content-Type': 'application/json'},
       body: json.encode(regionData),
     );
 
+    print("STATUS: ${response.statusCode}");
+    print("BODY: ${response.body}");
+
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('Failed to predict risk');
+      throw Exception('Failed to predict risk: ${response.body}');
     }
   }
 }

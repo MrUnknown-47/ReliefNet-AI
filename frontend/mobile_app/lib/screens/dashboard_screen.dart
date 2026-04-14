@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/crisis_model.dart';
 import '../services/api_service.dart';
 import '../widgets/crisis_card.dart';
+import 'map_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -98,7 +99,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   'description': descriptionController.text,
                   'category': categoryController.text,
                   'people_affected': int.tryParse(peopleAffectedController.text) ?? 0,
-                  'location': {'lat': 0.0, 'lng': 0.0}, // Default required by backend
+                  'location': {'lat': 20.5937, 'lng': 78.9629}, // Default required by backend
                 };
                 Navigator.pop(context);
                 
@@ -187,6 +188,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.map),
+            tooltip: 'View Interactive Map',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MapScreen()),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.analytics),
             tooltip: 'Test Prediction',
