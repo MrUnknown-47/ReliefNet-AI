@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/crisis_model.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://10.0.2.2:8000/api';
+  static const String baseUrl = 'https://reliefnet-ai-sokn.onrender.com/api';
 
   Future<List<CrisisModel>> getCrises() async {
     final response = await http.get(Uri.parse('$baseUrl/crisis'));

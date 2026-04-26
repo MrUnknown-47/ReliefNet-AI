@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReliefNet AI | Autonomous Crisis Intelligence</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Modern Variables */
+        :root {
+            --bg: #050B14;
+            --surface: #0E1726;
+            --surface-hover: #162238;
+            --primary: #3B82F6;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --accent: #EF4444;
+            --accent-glow: rgba(239, 68, 68, 0.4);
+            --text: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border: #1E293B;
+        }
+
+        /* Resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--primary-glow);
+            background: #2563EB;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Badges */
+        .badge {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            display: inline-flex;
+            align-items: center;
+            margin: 0 0.5rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .badge-ai {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .badge-map {
+            background: rgba(168, 85, 247, 0.1);
+            color: #c084fc;
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        /* 1. Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Cards Layout (Grid) */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: var(--surface-hover);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 4. AI Engine Special Cards */
+        .ai-engine .card {
+            background: linear-gradient(145deg, var(--surface) 0%, #080C14 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .ai-engine .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ai-engine .card:hover::before {
+            opacity: 1;
+        }
+
+        /* 5. Flow Section */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .flow-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover .flow-icon {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+            transform: scale(1.05);
+        }
+
+        /* 8. Architecture */
+        .architecture-diagram {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            font-family: monospace;
+            color: var(--primary);
+            text-align: center;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.5;
+            font-size: 1rem;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Placeholders for video/images */
+        .media-placeholder {
+            width: 100%;
+            height: 400px;
+            background: var(--surface);
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-placeholder:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--surface-hover);
+        }
+
+        .video-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Map Marker Effect */
+        .pulse-marker {
+            width: 15px;
+            height: 15px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .pulse-marker::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background: #03060a;
+            padding: 5rem 0 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .team-info {
+            color: var(--text-muted);
+            margin-top: 2rem;
+        }
+
+        .team-info span {
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .grid-2,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-container {
+                flex-direction: column;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .architecture-diagram {
+                font-size: 0.8rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="hero-title reveal">
+                <span>ReliefNet AI</span>
+                Autonomous Crisis<br>Intelligence Network
+            </h1>
+            <p class="hero-tagline reveal">
+                Real-time AI-driven disaster intelligence platform that analyzes crises, predicts risks,
+                and deploys the right responders — instantly.
+            </p>
+
+            <div class="hero-cta reveal">
+                <a href="YOUR_APK_LINK" class="btn btn-primary">🚀 Download App</a>
+                <a href="YOUR_VIDEO_LINK" class="btn btn-secondary">🎥 Watch Demo</a>
+                <a href="https://reliefnet-ai-sokn.onrender.com/docs" class="btn btn-secondary" target="_blank">⚡ Open API Docs</a>
+            </div>
+
+            <div class="reveal" style="margin-top:2rem;">
+                <span class="badge"><i class="fa-solid fa-server" style="margin-right: 5px;"></i> Backend: Running</span>
+                <span class="badge badge-ai"><i class="fa-solid fa-brain" style="margin-right: 5px;"></i> AI: Active</span>
+                <span class="badge badge-map"><i class="fa-solid fa-map-location-dot" style="margin-right: 5px;"></i> Maps: Integrated</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. PROBLEM SECTION -->
+    <section id="problem">
+        <div class="container">
+            <h2 class="section-title reveal">The Problem</h2>
+            <p class="section-subtitle reveal">Why current disaster management systems fail when seconds matter.</p>
+
+            <div class="grid-2 reveal">
+                <div class="card">
+                    <i class="fa-solid fa-clock card-icon" style="color: var(--accent)"></i>
+                    <h3 class="card-title">Delayed Response</h3>
+                    <p>Information bottlenecks cause fatal delays in the golden hour of rescue operations.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-file-waveform card-icon" style="color: var(--accent)"></i>
+                    <h3 class="card-title">Unstructured Data</h3>
+                    <p>Chaotic, raw reports overwhelm command centers, making immediate triage nearly impossible.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-users-slash card-icon" style="color: var(--accent)"></i>
+                    <h3 class="card-title">Poor Coordination</h3>
+                    <p>Volunteers are dispatched blindly without factoring in dynamic ground conditions or specific
+                        skillsets.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-boxes-packing card-icon" style="color: var(--accent)"></i>
+                    <h3 class="card-title">Resource Misallocation</h3>
+                    <p>Critical life-saving supplies like water and medical aid frequently reach the wrong sectors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SOLUTION SECTION -->
+    <section id="solution" style="background: var(--surface)">
+        <div class="container">
+            <h2 class="section-title reveal">The ReliefNet Solution</h2>
+            <p class="section-subtitle reveal">An end-to-end intelligent response ecosystem.</p>
+
+            <div class="grid-4 reveal">
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-brain card-icon"></i>
+                    <h3 class="card-title">AI Analysis</h3>
+                    <p>Instantly extracts structured insights from chaotic field reports.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-bolt card-icon"></i>
+                    <h3 class="card-title">Risk Prediction</h3>
+                    <p>Forecasts impending disaster severity automatically.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-handshake-angle card-icon"></i>
+                    <h3 class="card-title">Smart Matching</h3>
+                    <p>Mathematically pairs the optimal volunteers to active crises.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-map-location-dot card-icon"></i>
+                    <h3 class="card-title">Live Mapping</h3>
+                    <p>Plots real-time triage zones for command centers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. AI ENGINE (IMPORTANT) -->
+    <section class="ai-engine" id="ai">
+        <div class="container">
+            <h2 class="section-title reveal">The Intelligence Engine</h2>
+            <p class="section-subtitle reveal">Powered by cutting-edge Machine Learning and Natural Language Processing.
+            </p>
+
+            <div class="grid-2 reveal">
+                <div class="card">
+                    <i class="fa-solid fa-language card-icon"></i>
+                    <h3 class="card-title">NLP Crisis Analyzer</h3>
+                    <p>Parses unstructured text instantly. Extracts exact crisis types (Flood, Fire), severity markers,
+                        and humanitarian needs (Food, Medical) without human intervention.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-chart-line card-icon"></i>
+                    <h3 class="card-title">Prediction Engine</h3>
+                    <p>Ingests real-time environmental telemetry (rainfall, population density, historical patterns) to
+                        synthesize a normalized, predictive 0.0-1.0 risk score.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-network-wired card-icon"></i>
+                    <h3 class="card-title">Volunteer Matching Algorithm</h3>
+                    <p>Calculates optimal responder assignments dynamically utilizing geospatial proximity algorithms
+                        and specific responder skillsets.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-microchip card-icon"></i>
+                    <h3 class="card-title">Explainable AI (XAI)</h3>
+                    <p>Doesn't just give a score—it explains why. Our ML outputs explicit risk factors (e.g., "Active
+                        Flood Alert") so command teams can trust autonomous decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="live-ai">
+        <div class="container">
+            <h2 class="section-title reveal">Live AI Output</h2>
+            <p class="section-subtitle reveal">Real structured intelligence generated autonomously by our backend</p>
+
+            <div class="card reveal" style="max-width: 600px; margin: 0 auto; padding: 0; background: #0d1117; border-color: #30363d; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                <div style="background: #161b22; padding: 12px 15px; border-bottom: 1px solid #30363d; display: flex; align-items: center; gap: 8px;">
+                    <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56;"></span>
+                    <span style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e;"></span>
+                    <span style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f;"></span>
+                    <span style="color: #8b949e; font-size: 0.85rem; font-family: monospace; margin-left: 10px;">nlp_analyzer.json</span>
+                </div>
+                <div style="padding: 2rem; overflow-x: auto;">
+                    <pre style="color: #e6edf3; font-family: 'Consolas', 'Monaco', monospace; font-size: 1rem; line-height: 1.6; margin: 0;">
+{
+  <span style="color: #7ee787;">"crisis_type"</span>: <span style="color: #a5d6ff;">"flood"</span>,
+  <span style="color: #7ee787;">"urgency_score"</span>: <span style="color: #79c0ff;">0.82</span>,
+  <span style="color: #7ee787;">"needs"</span>: [
+    <span style="color: #a5d6ff;">"water"</span>,
+    <span style="color: #a5d6ff;">"medical"</span>
+  ],
+  <span style="color: #7ee787;">"prediction_confidence"</span>: <span style="color: #79c0ff;">0.96</span>
+}
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE CRISIS DATA -->
+    <section id="live-data" style="background: var(--surface)">
+        <div class="container">
+            <h2 class="section-title reveal">Live Crisis Feed</h2>
+            <p class="section-subtitle reveal">Real-time data streaming directly from our AI backend</p>
+
+            <div id="crisis-list" class="grid-2 reveal">
+                <!-- Javascript will inject Live API data here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. HOW IT WORKS -->
+    <section id="workflow" style="background: var(--surface)">
+        <div class="container">
+            <h2 class="section-title reveal">Autonomous Pipeline</h2>
+            <p class="section-subtitle reveal">How raw data transforms into saving lives in milliseconds.</p>
+
+            <div class="flow-container reveal">
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h4>1. Report</h4>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h4>2. AI Analysis</h4>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>3. Prediction</h4>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+                    <h4>4. Matching</h4>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon"><i class="fa-solid fa-map"></i></div>
+                    <h4>5. Visualization</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. AI MAP INTELLIGENCE & 11. SCREENSHOTS -->
+    <section id="map">
+        <div class="container">
+            <h2 class="section-title reveal">AI Map Intelligence</h2>
+            <p class="section-subtitle reveal">Command the operation with real-time, color-coded geospatial awareness.
+            </p>
+
+            <div class="grid-2 reveal" style="align-items: center; margin-bottom: 4rem;">
+                <div>
+                    <h3 style="font-size: 2.2rem; margin-bottom: 2rem;">Visual Triage</h3>
+                    <ul
+                        style="list-style: none; display: flex; flex-direction: column; gap: 1.5rem; font-size: 1.1rem;">
+                        <li style="display: flex; align-items: center;"><span class="pulse-marker"></span> <strong>High
+                                Risk:</strong> Immediate intervention required. Animated pulse alerts command.</li>
+                        <li style="display: flex; align-items: center;"><span class="pulse-marker"
+                                style="background: orange; animation: none; border-color: orange;"></span>
+                            <strong>Medium Risk:</strong> Elevated threat level, dispatch queued.
+                        </li>
+                        <li style="display: flex; align-items: center;"><span class="pulse-marker"
+                                style="background: #22c55e; animation: none; border-color: #22c55e;"></span> <strong>Low
+                                Risk:</strong> Situation monitored and stabilizing.</li>
+                    </ul>
+                </div>
+                <div class="media-placeholder" style="border: none; background: transparent; overflow: hidden; position: relative;">
+                    <div style="position: absolute; top:0; left:0; right:0; bottom:0; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <iframe 
+                            src="https://www.google.com/maps?q=20.5937,78.9629&z=4&output=embed"
+                            style="width:100%; height:100%; border:0; border-radius:16px;"
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle reveal" style="margin-top: 5rem; font-size: 1.5rem;">Mobile Interfaces</h3>
+            <div class="grid-2 reveal">
+                <div class="media-placeholder" style="height: 500px;">
+                    [ Flutter Dashboard Placeholder ]
+                </div>
+                <div class="media-placeholder" style="height: 500px;">
+                    [ AI Prediction Popup Placeholder ]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. SYSTEM ARCHITECTURE & 9. TECH STACK -->
+    <section id="architecture" style="background: var(--surface)">
+        <div class="container">
+            <h2 class="section-title reveal">System Architecture</h2>
+            <p class="section-subtitle reveal">Built for scale, speed, and absolute reliability.</p>
+
+            <div class="architecture-diagram reveal">
+                [ Flutter Mobile App ] ───▶ [ FastAPI Engine ]
+                │
+                ┌───────┼───────┐
+                ▼ ▼ ▼
+                [NLP] [Predict] [Match]
+                │ │ │
+                └───────┼───────┘
+                ▼
+                [ Firebase Firestore DB ]
+                │
+                ▼
+                [ Google Maps Platform ]
+            </div>
+
+            <h3 class="section-subtitle reveal" style="margin-top: 5rem; font-size: 1.5rem;">Technology Stack</h3>
+            <div class="grid-4 reveal" style="text-align: center;">
+                <div class="card"><i class="fa-brands fa-flutter card-icon"></i>
+                    <h4>Flutter</h4>
+                </div>
+                <div class="card"><i class="fa-brands fa-python card-icon"></i>
+                    <h4>FastAPI</h4>
+                </div>
+                <div class="card"><i class="fa-solid fa-database card-icon"></i>
+                    <h4>Firebase</h4>
+                </div>
+                <div class="card"><i class="fa-solid fa-map-location-dot card-icon"></i>
+                    <h4>Google Maps</h4>
+                </div>
+                <div class="card"><i class="fa-solid fa-cloud card-icon"></i>
+                    <h4>Vertex AI Ready</h4>
+                </div>
+                <div class="card"><i class="fa-solid fa-robot card-icon"></i>
+                    <h4>Gemini Logic</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. DEMO SECTION -->
+    <section id="demo">
+        <div class="container">
+            <h2 class="section-title reveal">Watch it in Action</h2>
+            <p class="section-subtitle reveal">Experience the autonomous capabilities of ReliefNet AI.</p>
+
+            <div class="video-wrapper reveal">
+                <div class="media-placeholder" style="height: 450px; background: #000;">
+                    <div style="text-align: center;">
+                        <i class="fa-brands fa-youtube"
+                            style="font-size: 4rem; color: var(--accent); margin-bottom: 1rem; cursor: pointer; transition: transform 0.2s;"></i><br>
+                        <span>[ YouTube Video Embed Placeholder ]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. IMPACT & 13. FUTURE SCOPE -->
+    <section id="impact" style="background: var(--surface)">
+        <div class="container">
+            <div class="grid-2 reveal">
+                <div>
+                    <h2 class="section-title" style="text-align: left; font-size: 2rem;">Real-World Impact</h2>
+                    <div class="card" style="margin-top: 2rem; height: 100%;">
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 2rem;">
+                            <li style="display: flex; gap: 1rem;"><i class="fa-solid fa-stopwatch"
+                                    style="color: var(--primary); font-size: 1.5rem;"></i>
+                                <div><strong>Faster Response:</strong> Cuts triage time from hours to milliseconds.
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 1rem;"><i class="fa-solid fa-heart-pulse"
+                                    style="color: var(--accent); font-size: 1.5rem;"></i>
+                                <div><strong>Reduced Casualties:</strong> Predictive models alert danger before it
+                                    escalates.</div>
+                            </li>
+                            <li style="display: flex; gap: 1rem;"><i class="fa-solid fa-people-arrows"
+                                    style="color: var(--primary); font-size: 1.5rem;"></i>
+                                <div><strong>Better Coordination:</strong> Mathematical matching prevents bottlenecking
+                                    of personnel.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title" style="text-align: left; font-size: 2rem;">Future Scope</h2>
+                    <div class="card" style="margin-top: 2rem; height: 100%;">
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 2rem;">
+                            <li style="display: flex; gap: 1rem;"><i class="fa-solid fa-satellite"
+                                    style="color: var(--primary); font-size: 1.5rem;"></i>
+                                <div><strong>Satellite Detection:</strong> Autonomous disaster triggers from orbit.
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 1rem;"><i class="fa-solid fa-camera"
+                                    style="color: var(--primary); font-size: 1.5rem;"></i>
+                                <div><strong>Vision AI:</strong> Multimodal damage assessment from photos.</div>
+                            </li>
+                            <li style="display: flex; gap: 1rem;"><i class="fa-solid fa-wifi"
+                                    style="color: var(--primary); font-size: 1.5rem;"></i>
+                                <div><strong>Offline Mesh Networks:</strong> Bluetooth P2P reporting when towers
+                                    collapse.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. TEAM & 15. CTA FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content reveal">
+                <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Ready to save lives?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Deploy the autonomous crisis engine today.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-primary"><i class="fa-brands fa-android"></i> Download APK</a>
+                    <a href="#" class="btn btn-secondary"><i class="fa-brands fa-github"></i> View Source</a>
+                </div>
+
+                <div class="team-info">
+                    <p>Built with <i class="fa-solid fa-heart" style="color: var(--accent);"></i> by
+                        <span>CltAltDefeat</span> for the Hackathon.
+                    </p>
+                    <p style="margin-top: 0.5rem;">Team Lead: <span>Anushka Verma</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Minimal JS for Scroll Animations -->
+    <script>
+        async function loadCrises() {
+            try {
+                const res = await fetch("https://reliefnet-ai-sokn.onrender.com/api/crisis/");
+                const data = await res.json();
+
+                const container = document.getElementById("crisis-list");
+                container.innerHTML = "";
+
+                data.forEach(c => {
+                    const div = document.createElement("div");
+                    div.className = "card";
+                    div.style = "padding: 1.5rem;";
+                    div.innerHTML = `
+                        <h3 class="card-title" style="margin-bottom: 0.5rem;">${c.title}</h3>
+                        <p style="margin-bottom: 1rem; color: var(--text-muted);">${c.description}</p>
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <span class="badge" style="margin: 0; font-size: 0.8rem;">${c.category}</span>
+                            <span class="badge badge-ai" style="margin: 0; font-size: 0.8rem;"><i class="fa-solid fa-users" style="margin-right: 5px;"></i> ${c.people_affected} Affected</span>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            } catch (err) {
+                console.error("Failed to load live crises:", err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger immediately on load
+            
+            // Execute Live API Fetch
+            loadCrises();
+        });
+    </script>
+</body>
+
+</html>
