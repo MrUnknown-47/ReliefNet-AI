@@ -85,6 +85,16 @@ Check out the full application walk-through and features in action:
 
 ---
 
+## 📊 Project Presentation
+
+Dive deeper into our architecture, business model, and vision:
+
+[![Pitch Deck](https://img.shields.io/badge/Canva-View_Pitch_Deck-00C4CC?style=for-the-badge&logo=canva&logoColor=white)](https://canva.link/rbxiy25rj6q77gr)
+
+> Or view the simple markdown link: [ReliefNet AI Pitch Deck (Canva)](https://canva.link/rbxiy25rj6q77gr)
+
+---
+
 ## ⚙️ Installation Guide
 
 ### Backend Setup (FastAPI)
