@@ -28,7 +28,8 @@ class ApiService {
     }
   }
 
-  Future<Map<String, dynamic>> predictRisk(Map<String, dynamic> regionData) async {
+  Future<Map<String, dynamic>> predictRisk(
+      Map<String, dynamic> regionData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/predict/'), // ← trailing slash
       headers: {'Content-Type': 'application/json'},
