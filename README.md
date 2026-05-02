@@ -62,10 +62,21 @@ ReliefNet AI pushes machine learning to the forefront of crisis management:
 ---
 
 ## 📸 Screenshots
-*(Coming Soon)*
-- `[ Placeholder: Interactive Map with Pulsing High-Risk Markers ]`
-- `[ Placeholder: AI Crisis Analysis Dashboard ]`
-- `[ Placeholder: Volunteer Triage & Matching Screen ]`
+
+<p align="center">
+  <img src="screenshots/Screenshot_20260502_130059.png" width="30%">
+  <img src="screenshots/Screenshot_20260502_130131.png" width="30%">
+  <img src="screenshots/Screenshot_20260502_130218.png" width="30%">
+</p>
+<p align="center">
+  <img src="screenshots/Screenshot_20260502_130237.png" width="30%">
+  <img src="screenshots/Screenshot_20260502_130305.png" width="30%">
+  <img src="screenshots/Screenshot_20260502_130318.png" width="30%">
+</p>
+<p align="center">
+  <img src="screenshots/Screenshot_20260502_130335.png" width="30%">
+  <img src="screenshots/Screenshot_20260502_130425.png" width="30%">
+</p>
 
 ---
 
