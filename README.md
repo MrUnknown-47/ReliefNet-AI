@@ -79,8 +79,9 @@ ReliefNet AI pushes machine learning to the forefront of crisis management:
 ---
 
 ## 🎥 Live Demo
-*(Coming Soon)*
-- `[ Placeholder: Link to YouTube / Loom Demo Video ]`
+
+Check out the full application walk-through and features in action:
+[![ReliefNet AI Demo Video](https://img.youtube.com/vi/FYYJjwomQWI/maxresdefault.jpg)](https://youtu.be/FYYJjwomQWI)
 
 ---
 
