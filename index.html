@@ -447,6 +447,25 @@
             }
         }
 
+        /* Screenshot Grid */
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .screenshot-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        .screenshot-img:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
         @media (max-width: 600px) {
 
             .grid-2,
@@ -766,6 +785,24 @@
                 <div class="card"><i class="fa-solid fa-robot card-icon"></i>
                     <h4>Gemini Logic</h4>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOBILE INTERFACES -->
+    <section id="interfaces" style="background: var(--surface)">
+        <div class="container">
+            <h2 class="section-title reveal">Mobile Interfaces</h2>
+            <p class="section-subtitle reveal">Empowering field volunteers with a beautiful, intuitive Flutter app.</p>
+            <div class="screenshot-grid reveal">
+                <img src="screenshots/Screenshot_20260502_130059.png" class="screenshot-img" alt="Mobile UI 1">
+                <img src="screenshots/Screenshot_20260502_130131.png" class="screenshot-img" alt="Mobile UI 2">
+                <img src="screenshots/Screenshot_20260502_130218.png" class="screenshot-img" alt="Mobile UI 3">
+                <img src="screenshots/Screenshot_20260502_130237.png" class="screenshot-img" alt="Mobile UI 4">
+                <img src="screenshots/Screenshot_20260502_130305.png" class="screenshot-img" alt="Mobile UI 5">
+                <img src="screenshots/Screenshot_20260502_130318.png" class="screenshot-img" alt="Mobile UI 6">
+                <img src="screenshots/Screenshot_20260502_130335.png" class="screenshot-img" alt="Mobile UI 7">
+                <img src="screenshots/Screenshot_20260502_130425.png" class="screenshot-img" alt="Mobile UI 8">
             </div>
         </div>
     </section>
